@@ -1,0 +1,54 @@
+<mat-sidenav-container fxFill>
+
+
+  <div fxLayout="row" fxLayoutAlign="start start">
+
+    <mat-card class="panel-card">
+      <mat-card-header>
+        <mat-card-title><h4>Herramientas disponibles</h4></mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-input-container>
+          <input mdInput placeholder="Búsqueda..." value="">
+        </mat-input-container>
+
+
+      </mat-card-content>
+      <mat-card-actions>
+        <span fxFlex></span>
+        <button mat-button (click)="newTool()">
+          <mat-icon>add</mat-icon>
+
+          <span>New</span>
+        </button>
+
+      </mat-card-actions>
+    </mat-card>
+    <mat-card *ngFor="let tool of tools" class="panel-card">
+      <mat-card-header>
+        <mat-card-title><h4>{{tool.name}}</h4></mat-card-title>
+        <mat-card-subtitle>{{tool.descripcion}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div fxLayout="column" fxLayoutAlign="center center" >
+          <!--TODO: debería ser un enlace guardado en el objeto que viene de bd y ser distinto para cada uno -->
+          <img src="https://s3.amazonaws.com/of-tools-icons/d2.png">
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <span fxFlex></span>
+        <button mat-button (click)="selectTool(tool)">
+          <mat-icon>info</mat-icon>
+        </button>
+
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <mat-sidenav #detailSideNav mode="over" align="end" (close)="detailSideNavClosed()">
+
+    <tool-detail #detailForm (toolsChange)="toolsChanged()"></tool-detail>
+
+  </mat-sidenav>
+
+</mat-sidenav-container>

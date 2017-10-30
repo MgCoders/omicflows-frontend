@@ -1,0 +1,43 @@
+<mat-sidenav-container fxFill>
+  <mat-sidenav #graphDetail mode="over" align="end" [opened]="selectedObject" onclose="exitDetail()">
+    <div *ngIf="selectedObject">
+      <step-detail #stepDetail [step]="selectedObject" [isNew]="selectedIsNew" [activeWorkflow]="activeWorkflow" (workflowChange)="updateCanvas($event)"></step-detail>
+    </div>
+  </mat-sidenav>
+
+  <div  [fxLayout]="row" [fxLayout.md]="column" fxLayoutAlign="start stretch" *ngIf="activeWorkflow">
+
+
+    <mat-card fxFlex="20" class="panel-card">
+      <mat-card-header>
+        <mat-card-title><h4>Nuevo workflow</h4></mat-card-title>
+        <mat-card-subtitle>{{activeWorkflow.name}}</mat-card-subtitle>
+        <button mat-mini-fab (click)="closeWf()" *ngIf="!activeWorkflow.complete">
+          <mat-icon>save</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content *ngIf="!activeWorkflow.complete">
+        <h4>Herramientas</h4>
+        <mat-list>
+
+
+          <mat-list-item *ngFor="let tool of tools">
+            <mat-icon mat-list-icon>folder</mat-icon>
+            <h4 mat-line>{{tool.name}}</h4>
+            <p mat-line> {{tool.cwl}} </p>
+            <button mat-mini-fab (click)="newStep(tool)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </mat-list-item>
+
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+
+
+    <mat-card fxFlex class="panel-card">
+      <vis-canvas #visCanvas (clickEvent)="canvasClicked($event)"></vis-canvas>
+    </mat-card>
+  </div>
+</mat-sidenav-container>
+

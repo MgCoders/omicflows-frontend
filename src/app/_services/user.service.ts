@@ -1,20 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { User } from '../_models/user';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public authHttp: HttpClient) { }
 
-  public ping() {
-    console.log('ping');
-    const url = `${environment.apiUrl}/users/`;
-    this.http.get(url)
-      .subscribe(
-        data => console.log(data),
-        err => console.log(err)
-      );
+  getUsers(): Observable<User[]> {
+    return this.authHttp.get<User[]>(`${environment.apiUrl}/users/`);
   }
 
 }

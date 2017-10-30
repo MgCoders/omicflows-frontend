@@ -17,6 +17,5 @@ export class PageMaintenanceComponent implements OnInit {
 
   ngOnInit() {
     this.AppConfig = APPCONFIG;
-    this.userService.ping(); // TODO: sacar
   }
 }

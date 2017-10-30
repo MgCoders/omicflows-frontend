@@ -74,4 +74,11 @@ export class AuthService {
     localStorage.removeItem(TOKEN_NAME);
   }
 
+  public loggedAsAdminRole() {
+    if (JSON.parse(localStorage.getItem('currentUser'))) {
+      return JSON.parse(localStorage.getItem('currentUser')).role === 'ADMIN';
+    }
+    return false;
+  }
+
 }
