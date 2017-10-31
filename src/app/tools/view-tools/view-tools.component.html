@@ -1,7 +1,6 @@
-<mat-sidenav-container fxFill>
 
 
-  <div fxLayout="row" fxLayoutAlign="start start">
+  <div>
 
     <mat-card class="panel-card">
       <mat-card-header>
@@ -9,7 +8,7 @@
       </mat-card-header>
       <mat-card-content>
         <mat-input-container>
-          <input mdInput placeholder="Búsqueda..." value="">
+          <input matInput placeholder="Búsqueda..." value="">
         </mat-input-container>
 
 
@@ -47,8 +46,7 @@
 
   <mat-sidenav #detailSideNav mode="over" align="end" (close)="detailSideNavClosed()">
 
-    <tool-detail #detailForm (toolsChange)="toolsChanged()"></tool-detail>
+   <!-- <tool-detail #detailForm (toolsChange)="toolsChanged()"></tool-detail>-->
 
   </mat-sidenav>
 
-</mat-sidenav-container>

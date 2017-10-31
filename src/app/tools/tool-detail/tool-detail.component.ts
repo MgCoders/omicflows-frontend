@@ -10,8 +10,8 @@ import { MatSnackBar } from '@angular/material';
 @Component({
   moduleId: module.id,
   selector: 'tool-detail',
-  templateUrl: './tool-detail.component.html',
-  styleUrls: ['src/app/tools/tool-detail/tool-detail.component.css'],
+  templateUrl: 'tool-detail.component.html',
+  styleUrls: ['tool-detail.component.css'],
   exportAs: 'child'
 })
 

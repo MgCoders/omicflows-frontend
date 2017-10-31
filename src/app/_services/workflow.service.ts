@@ -14,21 +14,21 @@ export class WorkflowService {
   }
 
   newWorkflow(user: User): Observable<Workflow> {
-    return this.authHttp.post<Workflow>(`${environment.apiUrl}/omicflows-backend/rest/workflows`, user);
+    return this.authHttp.post<Workflow>(`${environment.apiUrl}/workflows`, user);
   }
 
   newStep(tool: Tool): Observable<WorkflowStep> {
     console.info('NEW STEP' , tool);
-    return this.authHttp.get<WorkflowStep>(`${environment.apiUrl}/omicflows-backend/rest/workflows/step/` + tool.id);
+    return this.authHttp.get<WorkflowStep>(`${environment.apiUrl}/workflows/step/` + tool.id);
   }
 
-  addStepToWorkflow(workflow: Workflow, step: WorkflowStep): Observable<Workflow>{
-    return this.authHttp.post<Workflow>(`${environment.apiUrl}/omicflows-backend/rest/workflows` + workflow.id, step);
+  addStepToWorkflow(workflow: Workflow, step: WorkflowStep): Observable<Workflow> {
+    return this.authHttp.post<Workflow>(`${environment.apiUrl}/workflows` + workflow.id, step);
   }
 
   closeWorkflow(workflow: Workflow): Observable<Workflow> {
     console.info('CLOSE WF' , workflow);
-    return this.authHttp.get<Workflow>(`${environment.apiUrl}/omicflows-backend/rest/workflows` + workflow.id);
+    return this.authHttp.get<Workflow>(`${environment.apiUrl}/workflows` + workflow.id);
   }
 
 

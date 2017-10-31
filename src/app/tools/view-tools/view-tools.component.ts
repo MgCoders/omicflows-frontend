@@ -3,18 +3,18 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { ToolService } from '../_services/tool.service';
-import { Tool } from '../_models/tool';
-import { ToolDetailComponent } from './tool-detail/tool-detail.component';
+import { ToolService } from '../../_services/tool.service';
+import { Tool } from '../../_models/tool';
+import { ToolDetailComponent } from '../tool-detail/tool-detail.component';
 import { MatSidenav } from '@angular/material';
 
 @Component({
   moduleId: module.id,
-  templateUrl: 'tools.component.html',
-  styleUrls: ['tools.component.css']
+  templateUrl: 'view-tools.component.html',
+  styleUrls: ['view-tools.component.css']
 })
 
-export class ToolsComponent implements OnInit {
+export class ViewToolsComponent implements OnInit {
   errorMessage: string;
   tools: Tool[] = [];
   selectedTool: Tool = null;

@@ -2,6 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LayoutComponent } from './layout.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { AuthGuard } from '../_guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: '/app/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'proyectos', loadChildren: '../proyectos/proyectos.module#ProyectosModule' },
+      { path: 'tools', loadChildren: '../tools/tools.module#ToolsModule', canActivate: [AuthGuard] },
       { path: 'chart', loadChildren: '../charts/charts.module#ChartsModule' },
       { path: 'form', loadChildren: '../forms/forms.module#MyFormsModule' },
       { path: 'page', loadChildren: '../pages/pages.module#PagesModule' },

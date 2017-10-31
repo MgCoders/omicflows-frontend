@@ -1,8 +1,8 @@
-<form #toolDetail="ngForm" (ngSubmit)="onSubmit()">
+<form  (ngSubmit)="onSubmit()">
   <mat-toolbar>
-    <button mat-button type="button" (click)="toolDetail.form.reset(); deleteSucceded()">
+ <!--   <button mat-button type="button" (click)="toolDetail.form.reset(); deleteSucceded()">
       <mat-icon>close</mat-icon>
-    </button>
+    </button>-->
     <button mat-button type="button" *ngIf="tool && tool.id" (click)="deleteTool()">
       <mat-icon>delete</mat-icon>
     </button>
@@ -17,20 +17,20 @@
   <div  fxLayout="column"  class="form-container" *ngIf="tool">
 
     <mat-input-container *ngIf="isEditEnabled()">
-      <input mdInput placeholder="Name" name="name" required [(ngModel)]="tool.name">
+      <input mat-input placeholder="Name" name="name" required >
     </mat-input-container>
     <label *ngIf="!isEditEnabled()">{{tool.name}}</label>
 
 
     <mat-input-container *ngIf="isEditEnabled()">
-      <input mdInput placeholder="Description" name="description" required [(ngModel)]="tool.descripcion">
+      <input mat-input placeholder="Description" name="description" required >
     </mat-input-container>
     <label *ngIf="!isEditEnabled()">{{tool.descripcion}}</label>
 
     <!--TODO: Si el texto del cwl desborda, debería aparecer scroll dentro del cuandro de texto y no scroll en el parent -->
     <div fxLayout="row" fxFlex="10">
     <mat-input-container *ngIf="isEditEnabled()" >
-      <textarea  mdInput placeholder="Cwl code" name="cwl" required [(ngModel)]="tool.cwl"></textarea>
+      <textarea  mat-input placeholder="Cwl code" name="cwl" required ></textarea>
     </mat-input-container>
     <pre fxFill *ngIf="!isEditEnabled()">{{tool.cwl}}</pre>
     </div>
