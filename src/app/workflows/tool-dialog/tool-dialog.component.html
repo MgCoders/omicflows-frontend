@@ -1,0 +1,16 @@
+<article class="article">
+  <h2 class="article-title">Tools</h2>
+      <mat-list>
+        <mat-list-item *ngFor="let tool of tools">
+          <img mat-list-avatar [src]="tool.avatar" alt="avatar">
+          <h3 mat-line> {{tool.name}} </h3>
+          <button mat-button class="mat-icon-button" aria-label="choose"
+                  (click)="dialogRef.close(tool)">
+            <mat-icon class="material-icons">add</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+<div md-dialog-actions>
+  <button mat-button (click)="dialogRef.close()">Close</button>
+</div>
+</article>

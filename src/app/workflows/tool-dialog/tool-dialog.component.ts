@@ -12,27 +12,7 @@ import { Tool } from '../../_models/tool';
 // openDialogWithAResult
 @Component({
   selector: 'dialog-result-example-dialog',
-  template: `<h1 md-dialog-title>Tools</h1>
-    <div md-dialog-content style="padding-bottom: 20px;">
-      <div class="box box-default">
-        <div class="box-header">Lists with avatars</div>
-        <div class="box-body">
-          <mat-list>
-            <mat-list-item *ngFor="let tool of tools">
-              <img mat-list-avatar [src]="tool.avatar" alt="avatar">
-              <h3 mat-line> {{tool.name}} </h3>
-              <button mat-button class="mat-icon-button" aria-label="choose"
-                      (click)="dialogRef.close(tool)">
-                <mat-icon class="material-icons">add</mat-icon>
-              </button>
-            </mat-list-item>
-          </mat-list>
-        </div>
-      </div>
-    </div>
-    <div md-dialog-actions>
-      <button mat-button (click)="dialogRef.close()">Close</button>
-    </div>`,
+  templateUrl: 'tool-dialog.component.html',
 })
 export class ToolDialogComponent implements OnInit {
 

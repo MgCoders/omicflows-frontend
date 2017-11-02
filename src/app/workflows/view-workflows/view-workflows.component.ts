@@ -26,8 +26,7 @@ import { StepDialogComponent } from '../step-detail/step-dialog.component';
 @Component({
   moduleId: module.id,
   selector: 'graph-component',
-  templateUrl: 'view-workflows.component.html',
-  styleUrls: ['view-workflows.component.css']
+  templateUrl: 'view-workflows.component.html'
 })
 export class ViewWorkflowsComponent implements OnInit {
 
@@ -54,7 +53,9 @@ export class ViewWorkflowsComponent implements OnInit {
   openDialogChooseTools() {
     const dialogRef = this.dialog.open(ToolDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
-      this.newStep(result);
+      if (result != null) {
+        this.newStep(result);
+      }
     });
   }
 
@@ -69,7 +70,8 @@ export class ViewWorkflowsComponent implements OnInit {
   canvasClicked(obj: any) {
     const selectedNode = obj.nodes[0];
     if (selectedNode) {
-      const step = this.activeWorkflow.steps.find((step) => step.name === selectedNode);
+      const step = this.activeWorkflow.steps.find((astep) => astep.name === selectedNode);
+      this.openDialogStepDetail(step);
       this.selectedIsNew = false;
     //  this.selectedObject = step;
       //this.detailSideNav.open();
