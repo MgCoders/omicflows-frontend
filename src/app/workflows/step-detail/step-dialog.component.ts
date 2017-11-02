@@ -1,11 +1,14 @@
 import {
   Component,
-  EventEmitter,
-  Input,
-  Output
+  Inject,
+  OnInit
 } from '@angular/core';
 import { Tool } from '../../_models/tool';
-import { MatSnackBar } from '@angular/material';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatSnackBar
+} from '@angular/material';
 import { WorkflowStep } from '../../_models/workflowStep';
 import { WorkflowService } from '../../_services/workflow.service';
 import { Workflow } from '../../_models/workflow';
@@ -13,47 +16,48 @@ import { WorkflowOut } from '../../_models/workflowOut';
 @Component({
   moduleId: module.id,
   selector: 'step-detail',
-  templateUrl: 'step-detail.component.html',
-  styleUrls: ['step-detail.component.css'],
+  templateUrl: 'step-dialog.component.html',
+  styleUrls: ['step-dialog.component.css'],
   exportAs: 'child'
 })
 
-export class StepDetailComponent {
-  @Input()
+export class StepDialogComponent implements OnInit {
+
   public step: WorkflowStep;
-  @Output()
-  public workflowChange: EventEmitter<Workflow> = new EventEmitter();
-  @Input()
   public isNew: boolean = false;
-  @Input()
   public activeWorkflow: Workflow;
   portList: WorkflowOut[] = [];
 
-  constructor(private wfService: WorkflowService, private snackBar: MatSnackBar) {
+  constructor(private wfService: WorkflowService,
+              private snackBar: MatSnackBar,
+              public dialogRef: MatDialogRef<StepDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
   }
 
-  onSubmit() {
-    this.addStep();
+  ngOnInit(): void {
+    this.step = this.data.step;
+    this.activeWorkflow = this.data.workflow;
   }
+
 
   submitSucceded(tool: Tool) {
-   /* this.tool = tool;
-    this.isNew = false;
-    this.isEdit = false;
-    this.toolsChange.emit(true);*/
+    /* this.tool = tool;
+     this.isNew = false;
+     this.isEdit = false;
+     this.toolsChange.emit(true);*/
   }
 
   deleteStep() {
     /*this.toolService.deleteTool(this.tool)
-      .subscribe(res => this.deleteSucceded(res),
-        error => this.handleError(error));*/
+     .subscribe(res => this.deleteSucceded(res),
+     error => this.handleError(error));*/
   }
 
   deleteSucceded(res: any) {
-   /* this.tool = null;
-    this.isEdit = false;
-    this.isNew = false;
-    this.toolsChange.emit(true);*/
+    /* this.tool = null;
+     this.isEdit = false;
+     this.isNew = false;
+     this.toolsChange.emit(true);*/
   }
 
   addStep() {
@@ -70,9 +74,8 @@ export class StepDetailComponent {
     this.wfService.addStepToWorkflow(this.activeWorkflow, this.step).subscribe(
       (workflow) => {
         this.activeWorkflow = workflow;
-        this.workflowChange.emit(this.activeWorkflow);
-        this.step = null;
-},
+        this.dialogRef.close(this.activeWorkflow);
+      },
       (error) => this.handleError(error)
     );
   }

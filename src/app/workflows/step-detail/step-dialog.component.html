@@ -1,0 +1,76 @@
+<h1 mat-dialog-title><b>{{step.id}}</b> / {{step.name}}</h1>
+<div mat-dialog-content style="padding-bottom: 20px;">
+
+
+  <form role="form" #stepDetail="ngForm" (ngSubmit)="addStep()">
+    <div *ngFor="let input of step.neededInputs">
+      <div class="form-group">
+        <mat-checkbox [(checked)]="input.mapped">Entrada intermedia</mat-checkbox>
+      </div>
+      <label>{{input.schema}}: {{input.name}}</label>
+
+        <mat-form-field *ngIf="input.mapped">
+        <mat-select placeholder="Herramienta"  name="tool"
+                    [(ngModel)]="input.sourceMappedToolName"
+                    (change)="getPortsFromActiveWorkflow(input.sourceMappedToolName)">
+          <mat-option *ngFor="let step of activeWorkflow.steps" [value]="step.name">
+            <b>{{step.id}}</b> / {{step.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="input.sourceMappedToolName">
+        <mat-select placeholder="Salida"  name="port"
+                    [(ngModel)]="input.sourceMappedPortName">
+          <mat-option *ngFor="let port of portList" [value]="port.name">
+            {{port.schema}}: {{port.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button type="submit">
+      Submit
+    </button>
+    <div class="divider"></div>
+  </form>
+</div>
+<!--
+  <form #stepDetail="ngForm" (ngSubmit)="onSubmit()">
+
+
+    <div *ngIf="step">
+      <span><b>{{step.id}}</b> / {{step.name}}</span>
+      <label>Entradas:</label>
+      <div *ngFor="let input of step.neededInputs">
+        <label>{{input.schema}}: {{input.name}}</label>
+        <section>
+          <mat-checkbox [(ngModel)]="input.mapped" name="mapped">Entrada intermedia</mat-checkbox>
+        </section>
+        <section>
+          <mat-select placeholder="Herramienta" *ngIf="input.mapped" name="tool"
+                      [(ngModel)]="input.sourceMappedToolName"
+                      (change)="getPortsFromActiveWorkflow(input.sourceMappedToolName)">
+            <mat-option *ngFor="let step of activeWorkflow.steps" [value]="step.name">
+              <b>{{step.id}}</b> / {{step.name}}
+            </mat-option>
+          </mat-select>
+
+          <mat-select placeholder="Salida" *ngIf="input.sourceMappedToolName" name="port"
+                      [(ngModel)]="input.sourceMappedPortName">
+            <mat-option *ngFor="let port of portList" [value]="port.name">
+              {{port.schema}}: {{port.name}}
+            </mat-option>
+          </mat-select>
+        </section>
+      </div>
+
+    </div>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+
+  <button mat-button type="button" (click)="deleteTool()">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>
+-->

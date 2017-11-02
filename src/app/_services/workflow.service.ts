@@ -23,12 +23,12 @@ export class WorkflowService {
   }
 
   addStepToWorkflow(workflow: Workflow, step: WorkflowStep): Observable<Workflow> {
-    return this.authHttp.post<Workflow>(`${environment.apiUrl}/workflows` + workflow.id, step);
+    return this.authHttp.post<Workflow>(`${environment.apiUrl}/workflows/` + workflow.id, step);
   }
 
   closeWorkflow(workflow: Workflow): Observable<Workflow> {
     console.info('CLOSE WF' , workflow);
-    return this.authHttp.get<Workflow>(`${environment.apiUrl}/workflows` + workflow.id);
+    return this.authHttp.get<Workflow>(`${environment.apiUrl}/workflows/` + workflow.id);
   }
 
 

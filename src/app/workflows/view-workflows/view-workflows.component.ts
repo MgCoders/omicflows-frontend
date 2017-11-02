@@ -15,8 +15,10 @@ import { User } from '../../_models/user';
 import { VisCanvasComponent } from '../../shared/vis-canvas/vis-canvas.component';
 import { Workflow } from '../../_models/workflow';
 import { ToolDialogComponent } from '../tool-dialog/tool-dialog.component';
+import { WorkflowStep } from '../../_models/workflowStep';
+import { StepDialogComponent } from '../step-detail/step-dialog.component';
 // import { WorkflowStep } from '../../_models/workflowStep';
-// import { StepDetailComponent } from '../step-detail/step-detail.component';
+// import { StepDialogComponent } from '../step-detail/step-detail.component';
 
 /**
  * This class represents the lazy loaded AboutComponent.
@@ -34,9 +36,9 @@ export class ViewWorkflowsComponent implements OnInit {
   @ViewChild('visCanvas')
   visCanvas: VisCanvasComponent;
   /*@ViewChild('stepDetail')
-  stepDetail: StepDetailComponent;*/
+  stepDetail: StepDialogComponent;*/
   activeWorkflow: Workflow = null;
- // selectedObject: WorkflowStep = null;
+  selectedObject: WorkflowStep = null;
   selectedIsNew: boolean = false;
   tools: Tool[] = [];
 
@@ -53,6 +55,14 @@ export class ViewWorkflowsComponent implements OnInit {
     const dialogRef = this.dialog.open(ToolDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       this.newStep(result);
+    });
+  }
+
+  openDialogStepDetail(newStep: WorkflowStep) {
+    const dialogRef = this.dialog.open(StepDialogComponent, { data: { step: newStep, workflow: this.activeWorkflow }});
+    dialogRef.afterClosed().subscribe((workflow) => {
+      this.activeWorkflow = workflow;
+      this.visCanvas.updateWorkflow(this.activeWorkflow);
     });
   }
 
@@ -84,19 +94,19 @@ export class ViewWorkflowsComponent implements OnInit {
 
   newStep(tool: Tool) {
     this.wfService.newStep(tool).subscribe(
-      (step) => this.newStepSucceded(step),
+      (step) => this.openDialogStepDetail(step),
       (error) => this.handleError(error)
     );
   }
 
-  newStepSucceded(/*step: WorkflowStep*/ step: any) {
+  newStepSucceded(step: WorkflowStep) {
     this.selectedIsNew = true;
- //   this.selectedObject = step;
+    this.selectedObject = step;
   }
 
   updateCanvas(workflow: Workflow) {
     this.activeWorkflow = workflow;
-   // this.visCanvas.updateWorkflow(this.activeWorkflow);
+    this.visCanvas.updateWorkflow(this.activeWorkflow);
  //   this.selectedObject = null;
     this.selectedIsNew = false;
   }
