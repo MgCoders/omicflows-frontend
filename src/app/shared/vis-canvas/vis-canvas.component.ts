@@ -7,8 +7,10 @@ import {
 } from '@angular/core';
 import { Workflow } from '../../_models/workflow';
 import { WorkflowStep } from '../../_models/workflowStep';
+import { Network, DataSet, Edge, IdType } from 'vis';
 
-declare var vis: any;
+
+//declare var vis: any;
 /**
  * This class represents the toolbar component.
  */
@@ -22,8 +24,8 @@ export class VisCanvasComponent implements OnInit {
 
    @Output()
    clickEvent: EventEmitter<any> = new EventEmitter();
-   nodes: any = new vis.DataSet([]);
-   edges: any = new vis.DataSet([]);
+   nodes: any = new DataSet([]);
+   edges: any = new DataSet([]);
    container: any;
    network: any;
 
@@ -69,7 +71,7 @@ export class VisCanvasComponent implements OnInit {
         }
       }
     };
-    this.network = new vis.Network(this.container, data, options);
+    this.network = new Network(this.container, data, options);
 
     this.nodes.add({label: 'CHAU', id: 2});
     this.nodes.add({label: 'HOLA', id: 1});
@@ -95,7 +97,7 @@ export class VisCanvasComponent implements OnInit {
       });
       this.nodes.add(new Node(step, step.name, step.id));
     });
-    //TODO:se pueden dibujar las entradas y salidas como nodos tmb, y en el slider dar la posibilidad de subir los archivos???
+    // TODO:se pueden dibujar las entradas y salidas como nodos tmb, y en el slider dar la posibilidad de subir los archivos???
   }
 
 }

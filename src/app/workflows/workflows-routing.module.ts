@@ -1,18 +1,18 @@
-import { NgModule } from '@angular/core';
-import {
+  import {
   RouterModule,
   Routes
 } from '@angular/router';
-import { WorkflowsComponent } from './workflows.component';
+  import { ViewWorkflowsComponent } from './view-workflows/view-workflows.component';
 
-export const ToolsRoutes: Routes = [
+  export const WorkflowsRoutes: Routes = [
   {
     path: '',
-    component: WorkflowsComponent,
+    component: ViewWorkflowsComponent,
     children: [
-      { path: '', redirectTo: '/app/dashboard', pathMatch: 'full' }
+      { path: '', redirectTo: '/app/dashboard', pathMatch: 'full' },
+      { path: 'view', component: ViewWorkflowsComponent }
     ]
   }
 ];
 
-export const WorkflowsRoutingModule = RouterModule.forChild(ToolsRoutes);
+  export const WorkflowsRoutingModule = RouterModule.forChild(WorkflowsRoutes);

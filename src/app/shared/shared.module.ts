@@ -14,6 +14,7 @@ import { VisCanvasComponent } from './vis-canvas/vis-canvas.component';
   exports: [
     EChartsDirective,
     SlimScrollDirective,
+    VisCanvasComponent
   ]
 })
 

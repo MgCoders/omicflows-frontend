@@ -4,17 +4,19 @@ import {
   ViewChild
 } from '@angular/core';
 import {
+  MatDialog,
   MatSidenav,
   MatSnackBar
 } from '@angular/material';
-import { ToolService } from '../_services/tool.service';
-import { Tool } from '../_models/tool';
-import { WorkflowService } from '../_services/workflow.service';
-import { User } from '../_models/user';
-import { VisCanvasComponent } from '../shared/vis-canvas/vis-canvas.component';
-import { Workflow } from '../_models/workflow';
-import { WorkflowStep } from '../_models/workflowStep';
-import { StepDetailComponent } from './step-detail/step-detail.component';
+import { ToolService } from '../../_services/tool.service';
+import { Tool } from '../../_models/tool';
+import { WorkflowService } from '../../_services/workflow.service';
+import { User } from '../../_models/user';
+import { VisCanvasComponent } from '../../shared/vis-canvas/vis-canvas.component';
+import { Workflow } from '../../_models/workflow';
+import { ToolDialogComponent } from '../tool-dialog/tool-dialog.component';
+// import { WorkflowStep } from '../../_models/workflowStep';
+// import { StepDetailComponent } from '../step-detail/step-detail.component';
 
 /**
  * This class represents the lazy loaded AboutComponent.
@@ -22,28 +24,36 @@ import { StepDetailComponent } from './step-detail/step-detail.component';
 @Component({
   moduleId: module.id,
   selector: 'graph-component',
-  templateUrl: 'src/app/workflows/workflows.component.html',
-  styleUrls: ['src/app/workflows/workflows.component.css']
+  templateUrl: 'view-workflows.component.html',
+  styleUrls: ['view-workflows.component.css']
 })
-export class WorkflowsComponent implements OnInit {
+export class ViewWorkflowsComponent implements OnInit {
 
-  @ViewChild('graphDetail')
-  detailSideNav: MatSidenav;
+  /*@ViewChild('graphDetail')
+  detailSideNav: MatSidenav;*/
   @ViewChild('visCanvas')
   visCanvas: VisCanvasComponent;
-  @ViewChild('stepDetail')
-  stepDetail: StepDetailComponent;
+  /*@ViewChild('stepDetail')
+  stepDetail: StepDetailComponent;*/
   activeWorkflow: Workflow = null;
-  selectedObject: WorkflowStep = null;
+ // selectedObject: WorkflowStep = null;
   selectedIsNew: boolean = false;
   tools: Tool[] = [];
 
-  constructor(public toolService: ToolService, public wfService: WorkflowService, private snackBar: MatSnackBar) {
+  constructor(public wfService: WorkflowService,
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.getTools();
     this.newWorkflow();
+  }
+
+  openDialogChooseTools() {
+    const dialogRef = this.dialog.open(ToolDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      this.newStep(result);
+    });
   }
 
   canvasClicked(obj: any) {
@@ -51,23 +61,17 @@ export class WorkflowsComponent implements OnInit {
     if (selectedNode) {
       const step = this.activeWorkflow.steps.find((step) => step.name === selectedNode);
       this.selectedIsNew = false;
-      this.selectedObject = step;
+    //  this.selectedObject = step;
       //this.detailSideNav.open();
     }
   }
 
   exitDetail() {
-    this.detailSideNav.close();
-    this.selectedObject = null;
+   // this.detailSideNav.close();
+  //  this.selectedObject = null;
   }
 
-  getTools() {
-    this.toolService.getTools()
-      .subscribe(
-        (tools) => this.tools = tools,
-        (error) => this.handleError(error)
-      );
-  }
+
 
   newWorkflow() {
     const user = new User();
@@ -85,15 +89,15 @@ export class WorkflowsComponent implements OnInit {
     );
   }
 
-  newStepSucceded(step: WorkflowStep) {
+  newStepSucceded(/*step: WorkflowStep*/ step: any) {
     this.selectedIsNew = true;
-    this.selectedObject = step;
+ //   this.selectedObject = step;
   }
 
   updateCanvas(workflow: Workflow) {
     this.activeWorkflow = workflow;
-    this.visCanvas.updateWorkflow(this.activeWorkflow);
-    this.selectedObject = null;
+   // this.visCanvas.updateWorkflow(this.activeWorkflow);
+ //   this.selectedObject = null;
     this.selectedIsNew = false;
   }
 

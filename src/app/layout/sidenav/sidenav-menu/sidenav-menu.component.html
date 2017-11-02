@@ -2,12 +2,20 @@
   <!-- <li class="nav-header"><span>Navigation</span></li> -->
   <li><a mat-button [routerLink]="['/app/dashboard']"><i class="nav-icon material-icons">home</i><span class="nav-text">Dashboard</span></a></li>
   <li><a mat-button href="javascript:;" myToggleQuickview="customizer"><i class="nav-icon material-icons">settings</i><span class="nav-text">Customizer</span></a></li>
+  <li class="nav-divider"></li>
   <li>
     <a mat-button href="#/app/tools"><i class="nav-icon material-icons">equalizer</i><span class="nav-text">Tools</span></a>
     <ul>
-      <li><a mat-button class="md-button prepend-icon" [routerLink]="['/app/tools/detail']">Alta</a></li>
+      <li><a mat-button class="md-button prepend-icon" [routerLink]="['/app/tools/view']">Ver</a></li>
     </ul>
   </li>
+  <li>
+    <a mat-button href="#/app/workflows"><i class="nav-icon material-icons">bubble_chart</i><span class="nav-text">Workflows</span></a>
+    <ul>
+      <li><a mat-button class="md-button prepend-icon" [routerLink]="['/app/workflows/view']">Ver</a></li>
+    </ul>
+  </li>
+  <li class="nav-divider"></li>
   <li>
     <a mat-button href="#/app/ui"><i class="nav-icon material-icons">bubble_chart</i><span class="nav-text">UI Kit</span></a>
     <ul>

@@ -12,8 +12,8 @@ import { Workflow } from '../../_models/workflow';
 @Component({
   moduleId: module.id,
   selector: 'new-step',
-  templateUrl: './new-step.component.html',
-  styleUrls: ['src/app/workflows/new-step/new-step.component.css'],
+  templateUrl: 'new-step.component.html',
+  styleUrls: ['new-step.component.css'],
   exportAs: 'child'
 })
 

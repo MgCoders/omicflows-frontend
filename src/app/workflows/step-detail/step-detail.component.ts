@@ -13,8 +13,8 @@ import { WorkflowOut } from '../../_models/workflowOut';
 @Component({
   moduleId: module.id,
   selector: 'step-detail',
-  templateUrl: './step-detail.component.html',
-  styleUrls: ['src/app/workflows/step-detail/step-detail.component.css'],
+  templateUrl: 'step-detail.component.html',
+  styleUrls: ['step-detail.component.css'],
   exportAs: 'child'
 })
 

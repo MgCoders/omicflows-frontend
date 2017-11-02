@@ -12,6 +12,7 @@ const routes: Routes = [
       { path: '', redirectTo: '/app/dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'tools', loadChildren: '../tools/tools.module#ToolsModule', canActivate: [AuthGuard] },
+      { path: 'workflows', loadChildren: '../workflows/workflows.module#WorkflowsModule', canActivate: [AuthGuard] },
       { path: 'chart', loadChildren: '../charts/charts.module#ChartsModule' },
       { path: 'form', loadChildren: '../forms/forms.module#MyFormsModule' },
       { path: 'page', loadChildren: '../pages/pages.module#PagesModule' },

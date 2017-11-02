@@ -21,7 +21,7 @@ export class ViewToolsComponent implements OnInit {
   @ViewChild('detailSideNav')
   detailSideNav: MatSidenav;
   @ViewChild('detailForm')
-    detailForm: ToolDetailComponent;
+  detailForm: ToolDetailComponent;
   isNewTool: boolean;
 
   constructor(public toolService: ToolService) {

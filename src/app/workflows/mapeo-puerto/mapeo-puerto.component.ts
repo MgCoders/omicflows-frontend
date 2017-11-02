@@ -10,7 +10,7 @@ import { WorkflowIn } from '../../_models/workflowIn';
 @Component({
   moduleId: module.id,
   selector: 'mapeo-puerto',
-  templateUrl: './mapeo-puerto.component.html',
+  templateUrl: 'mapeo-puerto.component.html',
   exportAs: 'child'
 })
 
