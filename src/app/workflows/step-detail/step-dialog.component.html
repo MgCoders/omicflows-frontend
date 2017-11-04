@@ -5,12 +5,12 @@
   <form role="form" #stepDetail="ngForm" (ngSubmit)="addStep()">
     <div *ngFor="let input of step.neededInputs">
       <div class="form-group">
-        <mat-checkbox [(checked)]="input.mapped">Entrada intermedia</mat-checkbox>
+        <mat-checkbox [(ngModel)]="input.mapped" name="mapped">Entrada intermedia</mat-checkbox>
       </div>
       <label>{{input.schema}}: {{input.name}}</label>
 
-        <mat-form-field *ngIf="input.mapped">
-        <mat-select placeholder="Herramienta"  name="tool"
+      <mat-form-field *ngIf="input.mapped">
+        <mat-select placeholder="Herramienta" name="tool"
                     [(ngModel)]="input.sourceMappedToolName"
                     (change)="getPortsFromActiveWorkflow(input.sourceMappedToolName)">
           <mat-option *ngFor="let step of activeWorkflow.steps" [value]="step.name">
@@ -19,7 +19,7 @@
         </mat-select>
       </mat-form-field>
       <mat-form-field *ngIf="input.sourceMappedToolName">
-        <mat-select placeholder="Salida"  name="port"
+        <mat-select placeholder="Salida" name="port"
                     [(ngModel)]="input.sourceMappedPortName">
           <mat-option *ngFor="let port of portList" [value]="port.name">
             {{port.schema}}: {{port.name}}

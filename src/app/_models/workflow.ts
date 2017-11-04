@@ -10,7 +10,7 @@ export class Workflow {
   public complete:boolean;
   public steps: WorkflowStep[];
   public neededInputs: WorkflowIn[];
-  public neededOutput: WorkflowOut[];
+  public neededOutputs: WorkflowOut[];
 
 
 

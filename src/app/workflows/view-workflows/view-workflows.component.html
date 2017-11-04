@@ -24,9 +24,23 @@
                 <i class="material-icons mdi-sm">add</i>
               </button>
             </a>
+            <h5 *ngIf="activeWorkflow.steps.length>0">Tools</h5>
             <mat-list dense *ngIf="activeWorkflow.steps.length>0">
               <mat-list-item *ngFor="let step of activeWorkflow.steps">
-                {{step.name}} / {{step.id}}
+                <p>{{step.name}} / {{step.id}}</p>
+              </mat-list-item>
+            </mat-list>
+            <h5 *ngIf="activeWorkflow.neededInputs.length>0">Inputs</h5>
+            <mat-list dense *ngIf="activeWorkflow.neededInputs.length>0">
+              <mat-list-item *ngFor="let input of activeWorkflow.neededInputs">
+                <p>{{input.name}} / {{input.schema}}</p>
+                <p *ngIf="input.mapped">Mapped: {{input.sourceMappedToolName}}/{{input.sourceMappedPortName}}</p>
+              </mat-list-item>
+            </mat-list>
+            <h5 *ngIf="activeWorkflow.neededOutputs.length>0">Outputs</h5>
+            <mat-list dense *ngIf="activeWorkflow.neededOutputs.length>0">
+              <mat-list-item *ngFor="let output of activeWorkflow.neededOutputs">
+                <p>{{output.name}} / {{output.schema}}</p>
               </mat-list-item>
             </mat-list>
           </div>
