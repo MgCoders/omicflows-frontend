@@ -28,7 +28,7 @@ export class WorkflowService {
 
   closeWorkflow(workflow: Workflow): Observable<Workflow> {
     console.info('CLOSE WF' , workflow);
-    return this.authHttp.get<Workflow>(`${environment.apiUrl}/workflows/` + workflow.id);
+    return this.authHttp.get<Workflow>(`${environment.apiUrl}/workflows/close/` + workflow.id);
   }
 
 

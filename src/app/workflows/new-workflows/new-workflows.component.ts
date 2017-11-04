@@ -25,10 +25,10 @@ import { StepDialogComponent } from '../step-detail/step-dialog.component';
  */
 @Component({
   moduleId: module.id,
-  selector: 'graph-component',
-  templateUrl: 'view-workflows.component.html'
+  selector: 'new-workflow',
+  templateUrl: 'new-workflows.component.html'
 })
-export class ViewWorkflowsComponent implements OnInit {
+export class NewWorkflowsComponent implements OnInit {
 
   /*@ViewChild('graphDetail')
   detailSideNav: MatSidenav;*/
