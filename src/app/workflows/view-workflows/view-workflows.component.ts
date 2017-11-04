@@ -59,8 +59,8 @@ export class ViewWorkflowsComponent implements OnInit {
     });
   }
 
-  openDialogStepDetail(newStep: WorkflowStep) {
-    const dialogRef = this.dialog.open(StepDialogComponent, { data: { step: newStep, workflow: this.activeWorkflow }});
+  openDialogStepDetail(newStep: WorkflowStep, isNew: boolean) {
+    const dialogRef = this.dialog.open(StepDialogComponent, { data: { step: newStep, workflow: this.activeWorkflow, new: isNew }});
     dialogRef.afterClosed().subscribe((workflow) => {
       this.activeWorkflow = workflow;
       this.visCanvas.updateWorkflow(this.activeWorkflow);
@@ -71,7 +71,7 @@ export class ViewWorkflowsComponent implements OnInit {
     const selectedNode = obj.nodes[0];
     if (selectedNode) {
       const step = this.activeWorkflow.steps.find((astep) => astep.name === selectedNode);
-      this.openDialogStepDetail(step);
+      this.openDialogStepDetail(step, false);
       this.selectedIsNew = false;
     //  this.selectedObject = step;
       //this.detailSideNav.open();
@@ -96,7 +96,7 @@ export class ViewWorkflowsComponent implements OnInit {
 
   newStep(tool: Tool) {
     this.wfService.newStep(tool).subscribe(
-      (step) => this.openDialogStepDetail(step),
+      (step) => this.openDialogStepDetail(step, true),
       (error) => this.handleError(error)
     );
   }

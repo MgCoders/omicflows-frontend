@@ -4,37 +4,31 @@
     <h3 class="article-title">New Workflow</h3>
     <div class="row">
       <div class="col-md-4">
-        <div class="mdl-card mdl-shadow--2dp mdl-card-full-width">
-          <div class="mdl-card__title" style="background: url('assets/images-demo/assets/600_400-2.jpg') center / cover; height: 176px; color: #fff;">
-            <h2 class="mdl-card__title-text">{{activeWorkflow.name}}</h2>
+        <div class="card card-white">
+          <div class="card-image">
+            <img src="assets/images-demo/assets/600_400-2.jpg">
+            <span class="card-title">{{activeWorkflow.name}}</span>
           </div>
-          <div class="mdl-card__supporting-text">
-            <mat-list>
+          <div class="card-content">
+            <a class="card-button float-right" href="javascript:;">
+              <button class="btn btn-icon btn-icon-round btn-floating btn-info" aria-label="share"
+                      *ngIf="!activeWorkflow.complete"
+                      (click)="closeWf()">
+                <i class="material-icons mdi-sm">save</i>
+              </button>
+            </a>
+            <a class="card-button float-right" href="javascript:;">
+              <button class="btn btn-icon btn-icon-round btn-floating btn-info" aria-label="addtool"
+                      *ngIf="!activeWorkflow.complete"
+                      (click)="openDialogChooseTools()">
+                <i class="material-icons mdi-sm">add</i>
+              </button>
+            </a>
+            <mat-list dense *ngIf="activeWorkflow.steps.length>0">
               <mat-list-item *ngFor="let step of activeWorkflow.steps">
-                <img mat-list-avatar src="https://s3.amazonaws.com/of-tools-icons/d2.png" alt="avatar">
-                <h3 mat-line> {{step.name}} </h3>
-                <p mat-line>
-                  <span> {{step.id}} </span>
-                </p>
+                {{step.name}} / {{step.id}}
               </mat-list-item>
             </mat-list>
-          </div>
-
-
-
-
-          <div class="mdl-card__actions mdl-card--border">
-            <button mat-button class="md-primary">Descartar</button>
-          </div>
-          <div class="mdl-card__menu">
-            <button mat-button color="primary" class="mat-icon-button" aria-label="share" *ngIf="!activeWorkflow.complete"
-                    (click)="closeWf()">
-              <mat-icon class="material-icons">save</mat-icon>
-            </button>
-            <button mat-button color="primary" class="mat-icon-button" aria-label="addtool" *ngIf="!activeWorkflow.complete"
-                    (click)="openDialogChooseTools()">
-              <mat-icon class="material-icons" >add</mat-icon>
-            </button>
           </div>
         </div>
       </div>
@@ -42,8 +36,6 @@
         <vis-canvas #visCanvas (clickEvent)="canvasClicked($event)"></vis-canvas>
       </div>
     </div>
-
-
 
 
   </article>

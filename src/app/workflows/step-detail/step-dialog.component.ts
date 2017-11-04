@@ -37,6 +37,7 @@ export class StepDialogComponent implements OnInit {
   ngOnInit(): void {
     this.step = this.data.step;
     this.activeWorkflow = this.data.workflow;
+    this.isNew = this.data.new;
   }
 
 
@@ -71,13 +72,18 @@ export class StepDialogComponent implements OnInit {
       console.log('OK');
     }
 
-    this.wfService.addStepToWorkflow(this.activeWorkflow, this.step).subscribe(
-      (workflow) => {
-        this.activeWorkflow = workflow;
-        this.dialogRef.close(this.activeWorkflow);
-      },
-      (error) => this.handleError(error)
-    );
+    if (this.isNew) {
+      this.wfService.addStepToWorkflow(this.activeWorkflow, this.step).subscribe(
+        (workflow) => {
+          this.activeWorkflow = workflow;
+          this.dialogRef.close(this.activeWorkflow);
+        },
+        (error) => this.handleError(error)
+      );
+    } else {
+       //TODO: editar y guardar step
+      this.dialogRef.close(this.activeWorkflow);
+    }
   }
 
   getPortsFromActiveWorkflow(stepId: string) {
