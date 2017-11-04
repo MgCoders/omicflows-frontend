@@ -8,9 +8,8 @@ import {
 import { Workflow } from '../../_models/workflow';
 import { WorkflowStep } from '../../_models/workflowStep';
 import { Network, DataSet, Edge, IdType } from 'vis';
-
-
-//declare var vis: any;
+import { WorkflowIn } from '../../_models/workflowIn';
+import { WorkflowOut } from '../../_models/workflowOut';
 /**
  * This class represents the toolbar component.
  */
@@ -47,7 +46,8 @@ export class VisCanvasComponent implements OnInit {
         hierarchical:
           {
             enabled: true,
-            direction: 'UD'
+            direction: 'UD',
+            sortMethod: 'directed'
           }
       },
       physics: {
@@ -90,13 +90,28 @@ export class VisCanvasComponent implements OnInit {
     console.info('UPDATE GRAPH');
     this.nodes.clear();
     this.edges.clear();
+    workflow.neededInputs.filter((input) => !input.mapped).forEach((input) => {
+      console.info('ADD INPUT ' + input.name);
+      this.nodes.add(new NodeInput(input, input.name, input.name));
+    });
+    workflow.neededOutputs.forEach((out) => {
+      console.info('ADD OUTPUT ' + out.name);
+      this.nodes.add(new NodeOutput(out, out.name, out.name));
+    });
     workflow.steps.forEach((step) => {
       console.info('ADD NODE ' + step.id);
       step.neededInputs.filter((input) => input.mapped).forEach((input) => {
         this.edges.add({from: input.sourceMappedToolName, to: step.name, label: input.schema + ':' + input.sourceMappedPortName + '->' + input.name});
       });
+      step.neededInputs.filter((input) => !input.mapped).forEach((input) => {
+        this.edges.add({from: input.name, to: step.name, label: input.schema + '->' + input.name});
+      });
+      step.neededOutputs.forEach((out) => {
+        this.edges.add({from: step.name, to: out.name, label: out.schema + '->' + out.name});
+      });
       this.nodes.add(new Node(step, step.name, step.id));
     });
+
     // TODO:se pueden dibujar las entradas y salidas como nodos tmb, y en el slider dar la posibilidad de subir los archivos???
   }
 
@@ -113,6 +128,34 @@ export class Node {
       this.image = 'https://s3.amazonaws.com/of-tools-icons/s3-logo.png';
     } else {
       this.image = 'https://s3.amazonaws.com/of-tools-icons/d2.png';
+    }
+  }
+}
+
+export class NodeInput {
+  public image: string = '';
+  constructor(public input: WorkflowIn, public id: string, public label: string) {
+    this.input = input;
+    this.id = id;
+    this.label = label;
+    if (this.input.schema === 'string') {
+      this.image = 'https://s3.amazonaws.com/of-tools-icons/noun_1338736_cc.png';
+    } else {
+      this.image = 'https://s3.amazonaws.com/of-tools-icons/noun_963466_cc.png';
+    }
+  }
+}
+
+export class NodeOutput {
+  public image: string = '';
+  constructor(public out: WorkflowOut, public id: string, public label: string) {
+    this.out = out;
+    this.id = id;
+    this.label = label;
+    if (this.out.schema === 'string') {
+      this.image = 'https://s3.amazonaws.com/of-tools-icons/noun_1338736_cc.png';
+    } else {
+      this.image = 'https://s3.amazonaws.com/of-tools-icons/noun_963466_cc.png';
     }
   }
 }
