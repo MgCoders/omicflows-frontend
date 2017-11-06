@@ -10,11 +10,12 @@ import {
 } from '@angular/material';
 import { ToolDetailComponent } from './tool-detail/tool-detail.component';
 import { CommonModule } from '@angular/common';
+import { ToolsComponent } from './tools.component';
 
 @NgModule({
   imports: [CommonModule, ToolsRoutingModule, SharedModule, MatCardModule, MatInputModule, MatButtonModule],
-  declarations: [ViewToolsComponent, ToolDetailComponent],
-  exports: [ViewToolsComponent],
+  declarations: [ToolsComponent, ViewToolsComponent, ToolDetailComponent],
+  exports: [ToolsComponent, ViewToolsComponent],
   providers: [ToolService]
 })
 

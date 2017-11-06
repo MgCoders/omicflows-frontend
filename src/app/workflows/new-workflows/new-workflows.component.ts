@@ -60,8 +60,10 @@ export class NewWorkflowsComponent implements OnInit {
   openDialogStepDetail(newStep: WorkflowStep, isNew: boolean) {
     const dialogRef = this.dialog.open(StepDialogComponent, { data: { step: newStep, workflow: this.activeWorkflow, new: isNew }});
     dialogRef.afterClosed().subscribe((workflow) => {
-      this.activeWorkflow = workflow;
-      this.visCanvas.updateWorkflow(this.activeWorkflow);
+      if (workflow) {
+        this.activeWorkflow = workflow;
+        this.visCanvas.updateWorkflow(this.activeWorkflow);
+      }
     });
   }
 

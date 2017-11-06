@@ -2,9 +2,13 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import {
+  MatDialog,
+  MatSnackBar
+} from '@angular/material';
 import { WorkflowService } from '../../_services/workflow.service';
 import { Workflow } from '../../_models/workflow';
+import { WorkflowDialogComponent } from '../workflow-dialog/workflow-dialog.component';
 
 @Component({
   selector: 'app-view-workflows',
@@ -16,7 +20,8 @@ export class ViewWorkflowsComponent implements OnInit {
   workflows: Workflow[] = [];
 
   constructor(public wfService: WorkflowService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -25,6 +30,11 @@ export class ViewWorkflowsComponent implements OnInit {
         (workflows) => this.workflows = workflows,
         (error) => this.handleError(error)
       );
+  }
+
+  openDialogViewWorkflow(workflow: Workflow) {
+    console.log(workflow);
+    this.dialog.open(WorkflowDialogComponent, {data: workflow});
   }
 
   private handleError(error: any) {

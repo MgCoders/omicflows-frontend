@@ -12,6 +12,13 @@
           <div class="card-content">
             <a class="card-button float-right" href="javascript:">
               <button class="btn btn-icon btn-icon-round btn-floating btn-info" aria-label="share"
+                      *ngIf="activeWorkflow.complete" (click)="openDialogViewWorkflow(activeWorkflow)"
+              >
+                <i class="material-icons mdi-sm">image</i>
+              </button>
+            </a>
+            <a class="card-button float-right" href="javascript:">
+              <button class="btn btn-icon btn-icon-round btn-floating btn-info" aria-label="share"
                       *ngIf="!activeWorkflow.complete"
               >
                 <i class="material-icons mdi-sm">save</i>

@@ -19,15 +19,17 @@ import { ToolDialogComponent } from './tool-dialog/tool-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { ViewWorkflowsComponent } from './view-workflows/view-workflows.component';
 import { WorkflowsComponent } from './workflows.component';
+import { WorkflowDialogComponent } from './workflow-dialog/workflow-dialog.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, WorkflowsRoutingModule, SharedModule, MatCardModule, MatInputModule, MatButtonModule, MatDialogModule, MatSelectModule, MatFormFieldModule, MatCheckboxModule],
-  declarations: [WorkflowsComponent, NewWorkflowsComponent, ToolDialogComponent, StepDialogComponent, ViewWorkflowsComponent /*, MapeoPuertoComponent, NewStepComponent*/],
+  declarations: [WorkflowsComponent, WorkflowDialogComponent, NewWorkflowsComponent, ToolDialogComponent, StepDialogComponent, ViewWorkflowsComponent /*, MapeoPuertoComponent, NewStepComponent*/],
   exports: [NewWorkflowsComponent, ToolDialogComponent, StepDialogComponent/*, MapeoPuertoComponent*/],
   providers: [WorkflowService, ToolService],
   entryComponents: [
     ToolDialogComponent,
-    StepDialogComponent
+    StepDialogComponent,
+    WorkflowDialogComponent
   ]
 })
 export class WorkflowsModule {

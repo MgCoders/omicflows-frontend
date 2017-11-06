@@ -2,12 +2,18 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  Input,
   OnInit,
   Output
 } from '@angular/core';
 import { Workflow } from '../../_models/workflow';
 import { WorkflowStep } from '../../_models/workflowStep';
-import { Network, DataSet, Edge, IdType } from 'vis';
+import {
+  DataSet,
+  Edge,
+  IdType,
+  Network
+} from 'vis';
 import { WorkflowIn } from '../../_models/workflowIn';
 import { WorkflowOut } from '../../_models/workflowOut';
 /**
@@ -21,6 +27,8 @@ import { WorkflowOut } from '../../_models/workflowOut';
 })
 export class VisCanvasComponent implements OnInit {
 
+  @Input()
+  workflowEntrada: Workflow;
    @Output()
    clickEvent: EventEmitter<any> = new EventEmitter();
    nodes: any = new DataSet([]);
@@ -73,12 +81,13 @@ export class VisCanvasComponent implements OnInit {
     };
     this.network = new Network(this.container, data, options);
 
-    this.nodes.add({label: 'CHAU', id: 2});
-    this.nodes.add({label: 'HOLA', id: 1});
-    this.edges.add({to: 1, from: 2});
+    if (this.workflowEntrada) {
+      this.updateWorkflow(this.workflowEntrada);
+    }
 
     this.network.on('click', (obj: any) => this.clickEvent.emit(obj));
   }
+
 
   /**
    * Me pasan el WF que adentro tiene lo necesario
