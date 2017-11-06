@@ -1,24 +1,27 @@
 import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
-import { User } from '../_models/user';
 import { Workflow } from '../_models/workflow';
 import { WorkflowStep } from '../_models/workflowStep';
 import { environment } from '../../environments/environment';
 import { Tool } from '../_models/tool';
 import { HttpClient } from '@angular/common/http';
-
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class WorkflowService {
-  constructor(private authHttp: HttpClient) {
+  constructor(private authHttp: HttpClient,
+              private authService: AuthService) {
   }
 
-  newWorkflow(user: User): Observable<Workflow> {
-    return this.authHttp.post<Workflow>(`${environment.apiUrl}/workflows`, user);
+  newWorkflow(): Observable<Workflow> {
+    return this.authHttp.post<Workflow>(`${environment.apiUrl}/workflows`, this.authService.getCurrentUser());
+  }
+
+  getWorkflows(): Observable<Workflow[]> {
+    return this.authHttp.get<Workflow[]>(`${environment.apiUrl}/workflows/` + this.authService.getCurrentUser().id);
   }
 
   newStep(tool: Tool): Observable<WorkflowStep> {
-    console.info('NEW STEP' , tool);
     return this.authHttp.get<WorkflowStep>(`${environment.apiUrl}/workflows/step/` + tool.id);
   }
 
@@ -27,7 +30,6 @@ export class WorkflowService {
   }
 
   closeWorkflow(workflow: Workflow): Observable<Workflow> {
-    console.info('CLOSE WF' , workflow);
     return this.authHttp.get<Workflow>(`${environment.apiUrl}/workflows/close/` + workflow.id);
   }
 

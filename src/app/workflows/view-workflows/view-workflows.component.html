@@ -1,0 +1,51 @@
+<section class="container-fluid with-maxwidth chapter">
+
+  <article class="article">
+    <h2 class="article-title">User Workflows</h2>
+    <div class="row">
+      <div class="col-xl-4 col-lg-6" *ngFor="let activeWorkflow of workflows">
+        <div class="card card-white">
+          <div class="card-image">
+            <img src="assets/images-demo/assets/600_400-2.jpg">
+            <span class="card-title">{{activeWorkflow.name}}</span>
+          </div>
+          <div class="card-content">
+            <a class="card-button float-right" href="javascript:">
+              <button class="btn btn-icon btn-icon-round btn-floating btn-info" aria-label="share"
+                      *ngIf="!activeWorkflow.complete"
+              >
+                <i class="material-icons mdi-sm">save</i>
+              </button>
+            </a>
+            <a class="card-button float-right" href="javascript:">
+              <button class="btn btn-icon btn-icon-round btn-floating btn-info" aria-label="addtool"
+                      *ngIf="!activeWorkflow.complete"
+              >
+                <i class="material-icons mdi-sm">add</i>
+              </button>
+            </a>
+            <h5 *ngIf="activeWorkflow.steps.length>0">Tools</h5>
+            <mat-list dense *ngIf="activeWorkflow.steps.length>0">
+              <mat-list-item *ngFor="let step of activeWorkflow.steps">
+                <p>{{step.name}} / {{step.id}}</p>
+              </mat-list-item>
+            </mat-list>
+            <h5 *ngIf="activeWorkflow.neededInputs.length>0">Inputs</h5>
+            <mat-list dense *ngIf="activeWorkflow.neededInputs.length>0">
+              <mat-list-item *ngFor="let input of activeWorkflow.neededInputs">
+                <p>{{input.name}} / {{input.schema}}</p>
+                <p *ngIf="input.mapped">Mapped: {{input.sourceMappedToolName}}/{{input.sourceMappedPortName}}</p>
+              </mat-list-item>
+            </mat-list>
+            <h5 *ngIf="activeWorkflow.neededOutputs.length>0">Outputs</h5>
+            <mat-list dense *ngIf="activeWorkflow.neededOutputs.length>0">
+              <mat-list-item *ngFor="let output of activeWorkflow.neededOutputs">
+                <p>{{output.name}} / {{output.schema}}</p>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

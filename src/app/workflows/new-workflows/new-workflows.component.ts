@@ -5,10 +5,8 @@ import {
 } from '@angular/core';
 import {
   MatDialog,
-  MatSidenav,
   MatSnackBar
 } from '@angular/material';
-import { ToolService } from '../../_services/tool.service';
 import { Tool } from '../../_models/tool';
 import { WorkflowService } from '../../_services/workflow.service';
 import { User } from '../../_models/user';
@@ -83,12 +81,10 @@ export class NewWorkflowsComponent implements OnInit {
   //  this.selectedObject = null;
   }
 
-
-
   newWorkflow() {
     const user = new User();
     user.id = '1';
-    this.wfService.newWorkflow(user).subscribe(
+    this.wfService.newWorkflow().subscribe(
       (wf) => this.activeWorkflow = wf,
       (error) => this.handleError(error)
     );
