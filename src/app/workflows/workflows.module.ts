@@ -12,7 +12,9 @@ import {
   MatCheckboxModule,
   MatDialogModule,
   MatFormFieldModule,
+  MatIconModule,
   MatInputModule,
+  MatListModule,
   MatSelectModule
 } from '@angular/material';
 import { ToolDialogComponent } from './tool-dialog/tool-dialog.component';
@@ -22,7 +24,7 @@ import { WorkflowsComponent } from './workflows.component';
 import { WorkflowDialogComponent } from './workflow-dialog/workflow-dialog.component';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, WorkflowsRoutingModule, SharedModule, MatCardModule, MatInputModule, MatButtonModule, MatDialogModule, MatSelectModule, MatFormFieldModule, MatCheckboxModule],
+  imports: [CommonModule, FormsModule, WorkflowsRoutingModule, SharedModule, MatCardModule, MatInputModule, MatButtonModule, MatDialogModule, MatSelectModule, MatFormFieldModule, MatCheckboxModule, MatListModule, MatIconModule],
   declarations: [WorkflowsComponent, WorkflowDialogComponent, NewWorkflowsComponent, ToolDialogComponent, StepDialogComponent, ViewWorkflowsComponent /*, MapeoPuertoComponent, NewStepComponent*/],
   exports: [NewWorkflowsComponent, ToolDialogComponent, StepDialogComponent/*, MapeoPuertoComponent*/],
   providers: [WorkflowService, ToolService],
