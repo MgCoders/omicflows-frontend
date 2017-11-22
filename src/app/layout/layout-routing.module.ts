@@ -13,6 +13,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'tools', loadChildren: '../tools/tools.module#ToolsModule', canActivate: [AuthGuard] },
       { path: 'workflows', loadChildren: '../workflows/workflows.module#WorkflowsModule', canActivate: [AuthGuard] },
+      { path: 'jobs', loadChildren: '../jobs/jobs.module#JobsModule', canActivate: [AuthGuard] },
       { path: 'chart', loadChildren: '../charts/charts.module#ChartsModule' },
       { path: 'ecommerce', loadChildren: '../ecommerce/ecommerce.module#ECommerceModule' },
       { path: 'form', loadChildren: '../forms/forms.module#MyFormsModule' },
