@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-run-job',
+  moduleId: module.id,
   templateUrl: './run-job.component.html',
   styleUrls: ['./run-job.component.scss']
 })
