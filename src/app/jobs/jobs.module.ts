@@ -8,10 +8,14 @@ import { JobsComponent } from './jobs.component';
 import { JobDetailComponent } from './job-detail/job-detail.component';
 import { NewJobComponent } from './new-job/new-job.component';
 import { RunJobComponent } from './run-job/run-job.component';
-import {JobService} from '../_services/job.service';
+import { JobService } from '../_services/job.service';
+import {
+    MatButtonModule, MatCardModule, MatIconModule, MatInputModule, MatListModule,
+    MatToolbarModule
+} from '@angular/material';
 
 @NgModule({
-    imports: [CommonModule, JobsRoutingModule, SharedModule],
+    imports: [CommonModule, JobsRoutingModule, SharedModule, MatListModule, MatCardModule, MatInputModule, MatButtonModule, MatIconModule, MatToolbarModule],
     declarations: [JobsComponent, ViewJobsComponent, JobDetailComponent, NewJobComponent, RunJobComponent],
     exports: [JobsComponent, ViewJobsComponent],
     providers: [JobService]

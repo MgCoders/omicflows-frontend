@@ -7,21 +7,28 @@
         <thead>
         <tr>
           <th class="mdl-data-table__cell--non-numeric">#</th>
-          <th class="mdl-data-table__cell--non-numeric">Nombre</th>
           <th class="mdl-data-table__cell--non-numeric">Workflow</th>
           <th class="mdl-data-table__cell--non-numeric">Entradas</th>
           <th class="mdl-data-table__cell--non-numeric">Salidas</th>
           <th class="mdl-data-table__cell--non-numeric">Estado</th>
+          <th class="mdl-data-table__cell--non-numeric"></th>
         </tr>
         </thead>
         <tbody>
         <tr>
           <td class="mdl-data-table__cell--non-numeric">1</td>
-          <td class="mdl-data-table__cell--non-numeric">my job</td>
-          <td class="mdl-data-table__cell--non-numeric">work work</td>
+          <td class="mdl-data-table__cell--non-numeric">my work</td>
           <td class="mdl-data-table__cell--non-numeric">....</td>
           <td class="mdl-data-table__cell--non-numeric">....</td>
           <td class="mdl-data-table__cell--non-numeric">running</td>
+          <td class="mdl-data-table__cell--non-numeric">
+            <a mat-button class="md-button prepend-icon" [routerLink]="['/app/jobs/detail']">
+              <i class="material-icons">info</i>
+            </a>
+            <a mat-button class="md-button prepend-icon" [routerLink]="['/app/jobs/run']">
+              <i class="material-icons">slideshow</i>
+            </a>
+          </td>
         </tr>
         </tbody>
       </table>
