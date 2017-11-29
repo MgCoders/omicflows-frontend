@@ -13,7 +13,7 @@ export const JobsRoutes: Routes = [
             { path: '', redirectTo: '/app/dashboard', pathMatch: 'full' },
             { path: 'view', component: ViewJobsComponent },
             { path: 'run', component: RunJobComponent },
-            { path: 'detail', component: JobDetailComponent },
+            { path: 'detail/:id', component: JobDetailComponent },
             { path: 'new', component: NewJobComponent }
         ]
     }

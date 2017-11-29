@@ -15,14 +15,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td class="mdl-data-table__cell--non-numeric">1</td>
-          <td class="mdl-data-table__cell--non-numeric">my work</td>
+        <tr *ngFor="let job of jobs" >
+          <td class="mdl-data-table__cell--non-numeric">{{ job.id }}</td>
+          <td class="mdl-data-table__cell--non-numeric">{{ job.workflowId }}</td>
           <td class="mdl-data-table__cell--non-numeric">....</td>
           <td class="mdl-data-table__cell--non-numeric">....</td>
           <td class="mdl-data-table__cell--non-numeric">running</td>
           <td class="mdl-data-table__cell--non-numeric">
-            <a mat-button class="md-button prepend-icon" [routerLink]="['/app/jobs/detail']">
+            <a mat-button class="md-button prepend-icon" [routerLink]="['/app/jobs/detail/' + job.id ]">
               <i class="material-icons">info</i>
             </a>
             <a mat-button class="md-button prepend-icon" [routerLink]="['/app/jobs/run']">
